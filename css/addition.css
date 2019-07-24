@@ -1,0 +1,11 @@
+.list_game {
+    list-style: none;
+}
+
+.nav-item {
+    color: wheat;
+}
+
+.list_game li {
+    text-overflow: ellipsis;
+}
