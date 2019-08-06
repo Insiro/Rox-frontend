@@ -21,21 +21,42 @@
 
 <body id="page-top">
 
+    <!-- dialog -->
+
+    <div class="modal dia" id="modalDialog">
+        <div class="modal-dialog dias">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dialogName">blank dialog</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div id="dialogContents" class="modal-body">
+                    <p>Content of the modal window</p>
+                    <table id="diatable"></table>
+                </div>
+                <div class="modal-footer">
+                    <button id="detailBtn" type="button" class="btn btn-primary">Go Details</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
         <a class="navbar-brand mr-1" href="index.html">ROX</a>
 
-        <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
-    </button>
-
         <!-- Navbar Search -->
-        <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <form action="search.html" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                <input type="text" class="form-control" name="kq" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="button">
-            <i class="fas fa-search"></i>
-          </button>
+                    <button class="btn" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
                 </div>
             </div>
         </form>
@@ -52,7 +73,7 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link active " href="index.html">
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -68,7 +89,7 @@
                     <a class="dropdown-item" href="404.html">404 Page</a>
                     <a class="dropdown-item" href="blank.html">Blank Page</a>
                     <a class="dropdown-item" href="Tables.html">table Page</a>
-                    <a class="dropdown-item" href="detail.html">detial Page</a>
+                    <a class="dropdown-item" href="search.html">Search Page</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -77,8 +98,8 @@
                     <span>Games</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <h6 class="dropdown-header">Other Pages:</h6>
-                    <a class="dropdown-item" href="javascript:;" onClick="go_table('OverWatch')">OverWatch</a>
+                    <h6 class="dropdown-header">Game:</h6>
+                    <a class="dropdown-item" href="javascript:;" onClick="go_table('OW')">OW</a>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('PUBG')">PUBG</a>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('LOL')">League of Legends</a>
                 </div>
@@ -92,130 +113,172 @@
                 <!-- Breadcrumbs-->
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="#">home</a>
+                        <a href="#">Dashboard</a>
                     </li>
                     <li class="breadcrumb-item active">Overview</li>
                 </ol>
-
                 <!-- Icon Cards-->
                 <div class="row">
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-blue o-hidden h-100">
+                        <div class="card text-sideOcher bg-Ocher o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
+                                    <img class="fas fa-fw fa-comments" src="https://img.icons8.com/windows/512/000000/pubg.png">
                                 </div>
                                 <div class="mr-5">PUBG</div>
                             </div>
-                            <ul class="list_game" id="PUBG_list">
+                            <ul class="list-game list-sideOcher" id="PUBG_list">
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
                             </ul>
-                            <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table('PUBG')">
-                                <span class="float-left">View Details</span>
+                            <a class="card-footer text-sideOcher clearfix small z-1" href="javascript:;" onClick="go_table('PUBG')">
+                                <span class="float-left">View all Contests</span>
                                 <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
                             </a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-orange o-hidden h-100">
+                        <div class="card text-sidegold bg-gold o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
+                                    <img class="fas fa-fw fa-comments" src="https://img.icons8.com/windows/512/000000/league-of-legends.png">
                                 </div>
                                 <div class="mr-5">League of Legends</div>
                             </div>
-                            <ul id="LOL_list" class="list_game">
+                            <ul id="LOL_list" class="list-game list-sidegold">
                             </ul>
-                            <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table('LOL')">
-                                <span class="float-left">View Details</span>
+                            <a class="card-footer text-sidegold clearfix small z-1" href="javascript:;" onClick="go_table('LOL')">
+                                <span class="float-left">View all Contests</span>
                                 <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
                             </a>
                         </div>
                     </div>
 
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-green o-hidden h-100">
+                        <div class="card text-sideorange bg-orange2 o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
+                                    <img class="fas fa-fw fa-comments" src="https://img.icons8.com/windows/96/000000/overwatch.png">
                                 </div>
                                 <div class="mr-5">Over Watch</div>
                             </div>
-                            <ul id="OW_list" class="list_game">
+                            <ul id="OW_list" class="list-game list-sideorange">
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
                             </ul>
-                            <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table('OverWatch')">
-                                <span class="float-left">View Details</span>
+                            <a class="card-footer text-sideorange clearfix small z-1" href="javascript:;" onClick="go_table('OW')">
+                                <span class="float-left">View all Contests</span>
                                 <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
                             </a>
                         </div>
                     </div>
+
                     <div class="col-xl-3 col-sm-6 mb-3">
                         <div class="card text-white bg-gray o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
                                 </div>
-                                <div class="mr-5">card_1</div>
+                                <div class="mr-5">gray card</div>
                             </div>
-                            <ul class="list_game">
-                                <li>game1</li>
-                                <li>game2</li>
-                                <li>game3</li>
-                                <li>game4</li>
+                            <ul class="list-game">
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
                             </ul>
-                            <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">>
-                                <span class="float-left">View Details</span>
+                            <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
+                                <span class="float-left">View all Contests </span>
                                 <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
                             </a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-cyber o-hidden h-100">
+                        <div class="card text-white bg-cyan o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
                                 </div>
-                                <div class="mr-5">card_2</div>
+                                <div class="mr-5">cyan card</div>
                             </div>
-                            <ul class="list_game">
-                                <li>game1</li>
-                                <li>game2</li>
-                                <li>game3</li>
-                                <li>game4</li>
+                            <ul class="list-game ">
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
                             </ul>
                             <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
-                                <span class="float-left">View Details</span>
+                                <span class="float-left">View all Contests</span>
                                 <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
                             </a>
                         </div>
                     </div>
-
                     <div class="col-xl-3 col-sm-6 mb-3">
-                        <div class="card text-white bg-dark o-hidden h-100">
+                        <div class="card text-white bg-blue2 o-hidden h-100">
                             <div class="card-body">
                                 <div class="card-body-icon">
                                 </div>
-                                <div class="mr-5">card_3</div>
+                                <div class="mr-5">blue card</div>
                             </div>
-                            <ul class="list_game">
-                                <li>game1</li>
-                                <li>game2</li>
-                                <li>game3</li>
-                                <li>game4</li>
+                            <ul class="list-game">
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
                             </ul>
                             <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
-                                <span class="float-left">View Details</span>
+                                <span class="float-left">View all Contests</span>
                                 <span class="float-right">
-                  <i class="fas fa-angle-right"></i>
-                </span>
+                                            <i class="fas fa-angle-right"></i>
+                                        </span>
                             </a>
                         </div>
                     </div>
-
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-pupple o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                </div>
+                                <div class="mr-5">pupple card</div>
+                            </div>
+                            <ul class="list-game">
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                            </ul>
+                            <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
+                                <span class="float-left">View all Contests</span>
+                                <span class="float-right">
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-sm-6 mb-3">
+                        <div class="card text-white bg-green2 o-hidden h-100">
+                            <div class="card-body">
+                                <div class="card-body-icon">
+                                </div>
+                                <div class="mr-5">green card</div>
+                            </div>
+                            <ul class="list-game">
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                            </ul>
+                            <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
+                                <span class="float-left">View all Contests</span>
+                                <span class="float-right">
+                                        <i class="fas fa-angle-right"></i>
+                                    </span>
+                            </a>
+                        </div>
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
@@ -225,6 +288,11 @@
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
                             <span>Copyright © Your Website 2019</span>
+                            <br>
+                            <!--outter page icons-->
+                            <span>Icons : <a href="https://icons8.com/icon/30638/overwatch">Overwatch icon by Icons8</a>/
+                            <a href="https://icons8.com/icon/63638/pubg">PUBG icon by Icons8</a>/ 
+                            <a href="https://icons8.com/icon/37204/league-of-legends">League of Legends icon by Icons8</a></span>
                         </div>
                     </div>
                 </footer>
@@ -257,7 +325,7 @@
                 if (arguments[1].length == 0 || arguments.length < 1) document.getElementById(theGame + "_list").innerHTML += ("<li> No data </li>");
                 else {
                     for (var i = 0; i < arguments[1].length; i++) {
-                        document.getElementById(arguments[0] + "_list").innerHTML += ("<li>" + arguments[1][i].name.substring(0, 25) + "</li>");
+                        document.getElementById(arguments[0] + "_list").innerHTML += ("<li ><a onclick='viewDialog(\"" + arguments[1][i]._id + "\", \"" + arguments[0] + "\")' href='javascript:;'>" + (arguments[1][i].name.length > 25 ? arguments[1][i].name.substring(0, 23) + "..." : arguments[1][i].name) + "</a></li>");
                     }
                 }
             }

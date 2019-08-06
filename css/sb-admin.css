@@ -7235,14 +7235,14 @@ button.bg-green:focus {
     background-color: #1e7e34 !important;
 }
 
-.bg-cyber {
+.bg-cyan {
     background-color: #17a2b8 !important;
 }
 
-a.bg-cyber:hover,
-a.bg-cyber:focus,
-button.bg-cyber:hover,
-button.bg-cyber:focus {
+a.bg-cyan:hover,
+a.bg-cyan:focus,
+button.bg-cyan:hover,
+button.bg-cyan:focus {
     background-color: #117a8b !important;
 }
 

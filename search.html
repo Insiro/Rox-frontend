@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ROX- Detaile</title>
+    <title>ROX Search</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -20,10 +20,33 @@
 
 <body id="page-top">
 
+    <!-- dialog -->
+
+    <div class="modal dia" id="modalDialog">
+        <div class="modal-dialog dias">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="dialogName">blank dialog</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div id="dialogContents" class="modal-body">
+                    <p>Content of the modal window</p>
+                    <table id="diatable"></table>
+                </div>
+                <div class="modal-footer">
+                    <button id="detailBtn" type="button" class="btn btn-primary">Go Details</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
         <a class="navbar-brand mr-1" href="index.html">ROX</a>
-
 
 
         <!-- Navbar Search -->
@@ -32,8 +55,8 @@
                 <input type="text" class="form-control" name="kq" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
+                            <i class="fas fa-search"></i>
+                        </button>
                 </div>
             </div>
         </form>
@@ -69,7 +92,7 @@
                     <a class="dropdown-item" href="404.html">404 Page</a>
                     <a class="dropdown-item" href="blank.html">Blank Page</a>
                     <a class="dropdown-item" href="Tables.html">table Page</a>
-                    <a class="dropdown-item" href="search.html">Search Page</a>
+                    <a class="dropdown-item active" href="search.html">Search Page</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -78,7 +101,7 @@
                     <span>Games</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <h6 class="dropdown-header">Game:</h6>
+                    <h6 class="dropdown-header">Other Pages:</h6>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('OW')">OW</a>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('PUBG')">PUBG</a>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('LOL')">League of Legends</a>
@@ -90,19 +113,39 @@
             <div class="container-fluid">
 
                 <!-- Breadcrumbs-->
-                <ol class="breadcrumb" id="Breadcrumbs">
+                <ol class="breadcrumb" id="breadcrumb">
                     <li class="breadcrumb-item">
                         <a href="index.html">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">Details Page</li>
+                    <li class="breadcrumb-item active">Search</li>
                 </ol>
 
                 <!-- Page Content -->
-                <h1 id="con_name">Details</h1>
+                <h1 id="search_keyword">Search</h1>
                 <hr>
-                <div id="contexts">
-                    <p>Detalis of the contents</p>
+
+                <div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>start</th>
+                                        <th>end</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sc_list">
+                                    <tr>
+                                        <td colspan='4'>No Data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
+
+
 
             </div>
             <!-- /.container-fluid -->
@@ -145,20 +188,13 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <script src="js/addition.js"></script>
     <script>
-        var id = null,
-            table_n = null
+        var search_str = null
 
         function getQueryVariable(variable) {
             var query = window.location.search.substring(1);
@@ -173,66 +209,58 @@
         }
 
         function getVariableHandler() {
-            id = getQueryVariable("id");
-            table_n = getQueryVariable("table")
-            if (id !== null && table_n != null) {
-                console.log(id);
+            search_str = getQueryVariable("kq").replace("+", " ");
+            if (search_str !== null) {
+                console.log(search_str);
+                getSearchData('LOL', search_str)
             } else {
-                console.error("Error");
+                writeList();
             }
         }
 
-        function writedata() {
-            if (arguments.length == 0) {} else {
-                name = arguments[0].name;
-                var currentData = arguments[0];
-                var data = arguments[0].data;
-                document.title = "ROX - " + name
-                document.getElementById("Breadcrumbs").innerHTML =
-                    "<li class='breadcrumb-item'><a href='index.html'>Dashboard</a></li><li class='breadcrumb-item'><a href=\"javascript:;\" onClick=\"go_table('LOL')\">" + table_n + "</a></li><li class='breadcrumb-item active'>" + name + "</li>"
+        function getSearchData() {
+            var req = new XMLHttpRequest()
+            req.open("GET", "http://localhost:8080/api/search/" + arguments[0] + "/" + arguments[1]);
+            req.addEventListener("load", function() {
+                if (req.status === 200) {
+                    console.log("GetList Get success!");
+                    var json = JSON.parse(req.responseText);
+                    console.log(json);
+                    var data = json.data;
+                    writeList(arguments[0], data);
+                } else {
+                    writeList();
+                    console.error("NONE");
+                }
+            });
+            req.send(null);
+        }
 
-                document.getElementById("con_name").innerText = name;
-                document.getElementById("contexts").innerHTML = "<table id='_table'>"
-                _table = document.getElementById("_table")
-                _table.innerHTML += "<tr><th>start</th><td>" + currentData.start + "</td></tr>"
-                _table.innerHTML += "<tr><th>end</th><td>" + currentData.end + "</td></tr>"
-                if (data.Organizer != null) {
-                    var organizerString = "<tr><th>Organizer</th>";
-                    for (var i = 0; i < data.Organizer.length; i++) {
-                        var currentOrganizer = data.Organizer[i];
-                        organizerString += "<td><a href='" + currentOrganizer.link + "'>" + currentOrganizer.name + "</a></td>";
-                    }
-                    organizerString += "</tr>";
-                    _table.innerHTML += organizerString;
+        function writeList() {
+
+            if (arguments.length != 0) {
+                document.title = document.title + " : " + search_str
+                var search_s = document.getElementById("search_keyword")
+                search_s.innerText = "Search : " + search_str
+                var breads = document.getElementById("breadcrumb")
+                breads.innerHTML += "<li class='breadcrumb-item active'>" + search_str + "</li>"
+                if (arguments[1].length == 0) {
+                    return
                 }
-                if (data.Links != null) _table.innerHTML += "<tr><th>Link</th><td><a href=\"" + data.Links.link + "\"'>WebPage</a></td></tr>"
-                if (data['Number of Teams'] != null) _table.innerHTML += "<tr><th>Teams</th><td>" + data['Number of Teams'] + "</td></tr>"
-                if (data['Prize Pool'] != null) _table.innerHTML += "<tr><th>Prize_Pool</th><td>" + data['Prize Pool'] + "</td></tr>"
-                else if (data.Prize != null) _table.innerHTML += "<tr><th>Prize</th><td>" + data['Prize'] + "</td></tr>"
-                if (data.Region != null) _table.innerHTML += "<tr><th>Region</th><td>" + data.Region + "</td></tr>"
-                if (data.Type != null) _table.innerHTML += "<tr><th>Type</th><td>" + data.Type + "</td></tr>"
-                if (data.Tier != null) _table.innerHTML += "<tr><th>Tier</th><td>" + data.Tier + "</td></tr>"
-                if (data.Streams != null) {
-                    var StreamStr = "<tr><th>Steams</th>";
-                    for (var i = 0; i < data.Streams.length; i++) {
-                        curstream = data.Streams[i];
-                        StreamStr += "<td><a href=\"" + curstream.link + "\">" + curstream.name + "</a></td>"
-                    }
-                    _table.innerHTML += StreamStr + "</tr>";
-                }
-                if (arguments[0].data.Schedule != null) {
-                    var schStr = "<td colspan = 2><table border = 1><th colspan = 2>schedule</th>"
-                    for (var i = 0; i < data.Schedule.length; i++) {
-                        curSchedule = data.Schedule[i]
-                        schStr += "<tr><td>" + curSchedule[0] + "</td><td>" + curSchedule[1] + "</td></tr>"
-                    }
-                    _table.innerHTML += schStr + "</table></td></tr>";
+                var table = document.getElementById("sc_list")
+                table.innerHTML = ""
+                var cur;
+                for (var i = 0; i < arguments[1].length; i++) {
+                    cur = arguments[1][i]
+                    table.innerHTML += "<tr onclick=viewDialog(\"" + cur._id + "\",'LOL')><td><a href='javascript:;'>" + cur.name + "</a></td><td>" + cur.start + "</td><td>" + cur.end + "</td></a></tr>"
                 }
             }
         }
-        getVariableHandler();
-        if (id == null || table_n == null) {} else get_detail(table_n, id);
+        getVariableHandler()
     </script>
+
+
 </body>
+
 
 </html>
