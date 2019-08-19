@@ -2,6 +2,13 @@
     list-style: none;
 }
 
+#Nav .nav-item a:active,
+#Nav .nav-item a:link,
+#Nav .nav-item a:visited,
+#Nav .nav-item a:hover {
+    color: #A593E0 !important;
+}
+
 .nav-item {
     color: #A593E0;
 }
@@ -146,6 +153,10 @@ button.bg-green2:focus {
 
 .navbar-brand {
     color: #A593E0 !important;
+}
+
+.navbar-nav .nav-item {
+    margin: 5px;
 }
 
 .dropdown-item.active,

@@ -61,11 +61,7 @@
             </div>
         </form>
         <!-- Navbar -->
-        <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item">
-                item 1
-            </li>
-        </ul>
+        <div id='Nav'></div>
     </nav>
 
     <div id="wrapper">
@@ -153,13 +149,7 @@
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->
-            <footer class="sticky-footer">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website 2019</span>
-                    </div>
-                </div>
-            </footer>
+            <div id="footer"></div>
 
         </div>
         <!-- /.content-wrapper -->
@@ -198,16 +188,21 @@
     <!--script src="js/datatables.js"></script-->
     <script src="js/addition.js"></script>
     <script>
+        $(document).ready(function() {
+            $("#footer").load("footer.html");
+            $("#Nav").load("navbar.html");
+        });
         var tableName;
 
         function getVariableHandler() {
             tableName = getQueryVariable("table");
             if (tableName !== null) {
                 console.log(tableName);
-                var list = tableName + " list"
+                var gameN = (tableName == 'OW') ? 'OverWatch' : tableName;
+                var list = gameN + ' list'
                 document.title = "ROX - " + list
                 document.getElementById("table_name").innerText = list
-                document.getElementById("page_name").innerText = tableName
+                document.getElementById("page_name").innerText = gameN
                 document.getElementById("games_menu").className += " active"
                 document.getElementById(tableName + '_t').className += " active"
                 document.getElementById('tttable').className = "dropdown-item"

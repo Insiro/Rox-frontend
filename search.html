@@ -62,12 +62,7 @@
         </form>
 
         <!-- Navbar -->
-        <ul class="navbar-nav ml-auto ml-md-0">
-            <li class="nav-item">
-                item 1
-            </li>
-
-        </ul>
+        <div id="Nav"></div>
 
     </nav>
 
@@ -151,13 +146,7 @@
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->
-            <footer class="sticky-footer">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website 2019</span>
-                    </div>
-                </div>
-            </footer>
+            <div id="footer"></div>
 
         </div>
         <!-- /.content-wrapper -->
@@ -194,6 +183,10 @@
     <script src="js/sb-admin.min.js"></script>
     <script src="js/addition.js"></script>
     <script>
+        $(function() {
+            $("#footer").load("footer.html");
+            $("#Nav").load("navbar.html");
+        });
         var search_str = null
 
         function getQueryVariable(variable) {
