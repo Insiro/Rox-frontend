@@ -23,31 +23,11 @@
 
     <!-- dialog -->
 
-    <div class="modal dia" id="modalDialog">
-        <div class="modal-dialog dias">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="dialogName">blank dialog</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>&times;</span>
-                    </button>
-                </div>
-                <div id="dialogContents" class="modal-body">
-                    <p>Content of the modal window</p>
-                    <table id="diatable"></table>
-                </div>
-                <div class="modal-footer">
-                    <button id="detailBtn" type="button" class="btn btn-primary">Go Details</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
+    <div class="modal dia" id="modalDialog"></div>
+    <div class="modal dia" id="Login"> </div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-        <a class="navbar-brand mr-1" href="index.html">ROX</a>
+        <a class="navbar-brand mr-1" href=".">ROX</a>
 
         <!-- Navbar Search -->
         <form action="search.html" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -66,11 +46,10 @@
     </nav>
 
     <div id="wrapper">
-
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link active " href="index.html">
+                <a class="nav-link active " href="./">
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -295,36 +274,62 @@
         </a>
 
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </div>
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Page level plugin JavaScript-->
-        <script src="vendor/datatables/jquery.dataTables.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-        <script src="js/addition.js"></script>
-        <script>
-            $(function() {
-                $("#footer").load("footer.html");
-                $("#Nav").load("navbar.html");
-            });
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <script src="js/addition.js"></script>
+    <script>
+        $(function() {
+            $("#footer").load("footer.html");
+            $("#Nav").load("navbar.html");
+            $("#modalDialog").load("modal_dialog.html");
+            $("#Login").load("log-inModal.html");
+        });
+        if (window.sessionStorage.getItem('login') == true) {
+            console.log('logined')
+            var logined = document.getElementsByClassName('loggined');
+            var unloggined = document.getElementsByClassName('unloggined');
+            for (i = 0; i < loggined.length; i++) {
+                logined.item(i).style.display = 'none';
+            }
+            for (i = 0; i < loggined.length; i++) {
+                logined.item(i).style.display = 'inline';
+            }
+        } else {
+            console.log('Not logged in')
+        }
 
-            function writeList() {
-                if (arguments[1].length == 0 || arguments.length < 1) document.getElementById(theGame + "_list").innerHTML += ("<li> No data </li>");
-                else {
-                    for (var i = 0; i < arguments[1].length; i++) {
-                        document.getElementById(arguments[0] + "_list").innerHTML += ("<li ><a onclick='viewDialog(\"" + arguments[1][i]._id + "\", \"" + arguments[0] + "\")' href='javascript:;'>" + (arguments[1][i].name.length > 25 ? arguments[1][i].name.substring(0, 23) + "..." : arguments[1][i].name) + "</a></li>");
-                    }
+        function writeList() {
+            if (arguments[1].length == 0 || arguments.length < 1) document.getElementById(theGame + "_list").innerHTML += ("<li> No data </li>");
+            else {
+                for (var i = 0; i < arguments[1].length; i++) {
+                    document.getElementById(arguments[0] + "_list").innerHTML += ("<li ><a onclick='viewDialog(\"" + arguments[1][i]._id + "\", \"" + arguments[0] + "\")' href='javascript:;'>" + (arguments[1][i].name.length > 25 ? arguments[1][i].name.substring(0, 23) + "..." : arguments[1][i].name) + "</a></li>");
                 }
             }
-            //RUN CODE
-            //getGameList("PUBG")
-            //getGameList("OW")
-            getGameList("LOL", 4)
-        </script>
+        }
+
+
+        //RUN CODE
+        //getGameList("PUBG")
+        //getGameList("OW")
+        getGameList("LOL", 4);
+
+        document.addEventListener("load", function() {
+            document.addEventListener("load", function() {
+                reloadLoginState(false);
+            });;
+        });
+
+        // LOGIN
+    </script>
 </body>
 
 </html>

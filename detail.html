@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ROX- Detaile</title>
+    <title>ROX - 404</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -19,12 +19,11 @@
 </head>
 
 <body id="page-top">
+    <div class="modal dia" id="Login"> </div>
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-        <a class="navbar-brand mr-1" href="index.html">ROX</a>
-
-
+        <a class="navbar-brand mr-1" href="./">ROX</a>
 
         <!-- Navbar Search -->
         <form action="search.html" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -48,7 +47,7 @@
         <!-- Sidebar -->
         <ul class="sidebar navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="./">
                     <span>Dashboard</span>
                 </a>
             </li>
@@ -61,7 +60,7 @@
                     <h6 class="dropdown-header">devider</h6>
                     <div class="dropdown-divider"></div>
                     <h6 class="dropdown-header">Other Pages:</h6>
-                    <a class="dropdown-item" href="404.html">404 Page</a>
+                    <a class="dropdown-item active" href="404.html">404 Page</a>
                     <a class="dropdown-item" href="blank.html">Blank Page</a>
                     <a class="dropdown-item" href="Tables.html">table Page</a>
                     <a class="dropdown-item" href="search.html">Search Page</a>
@@ -80,30 +79,30 @@
                 </div>
             </li>
         </ul>
+
         <div id="content-wrapper">
 
             <div class="container-fluid">
 
                 <!-- Breadcrumbs-->
-                <ol class="breadcrumb" id="Breadcrumbs">
+                <ol class="breadcrumb">
                     <li class="breadcrumb-item">
-                        <a href="index.html">Dashboard</a>
+                        <a href="./">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">Details Page</li>
+                    <li class="breadcrumb-item active">404 Error</li>
                 </ol>
 
                 <!-- Page Content -->
-                <h1 id="con_name">Details</h1>
-                <hr>
-                <div id="contexts">
-                    <p>Detalis of the contents</p>
-                </div>
+                <h1 class="display-1">404</h1>
+                <p class="lead">Page not found. You can
+                    <a href="javascript:history.back()">go back</a> to the previous page, or
+                    <a href="./">return home</a>.</p>
 
             </div>
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->
-            <div id="footer"></div>
+            <div id='footer'></div>
 
         </div>
         <!-- /.content-wrapper -->
@@ -123,8 +122,8 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
+            <span aria-hidden="true">×</span>
+          </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
@@ -135,14 +134,9 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="js/sb-admin.min.js"></script>
     <script src="js/addition.js"></script>
     <script>
@@ -150,83 +144,26 @@
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");
         });
-
-        var id = null,
-            table_n = null
-
-        function getQueryVariable(variable) {
-            var query = window.location.search.substring(1);
-            var vars = query.split('&');
-            for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split('=');
-                if (decodeURIComponent(pair[0]) == variable) {
-                    return decodeURIComponent(pair[1]);
-                }
-            }
-            return null;
-        }
-
-        function getVariableHandler() {
-            id = getQueryVariable("id");
-            table_n = getQueryVariable("table")
-            if (id !== null && table_n != null) {
-                console.log(id);
-            } else {
-                console.error("Error");
-            }
-        }
-
-        function writedata() {
-            if (arguments.length == 0) {} else {
-                name = arguments[0].name;
-                var currentData = arguments[0];
-                var data = arguments[0].data;
-                document.title = "ROX - " + name
-                document.getElementById("Breadcrumbs").innerHTML =
-                    "<li class='breadcrumb-item'><a href='index.html'>Dashboard</a></li><li class='breadcrumb-item'><a href=\"javascript:;\" onClick=\"go_table('LOL')\">" + table_n + "</a></li><li class='breadcrumb-item active'>" + name + "</li>"
-
-                document.getElementById("con_name").innerText = name;
-                document.getElementById("contexts").innerHTML = "<table id='_table'>"
-                _table = document.getElementById("_table")
-                _table.innerHTML += "<tr><th>start</th><td>" + currentData.start + "</td></tr>"
-                _table.innerHTML += "<tr><th>end</th><td>" + currentData.end + "</td></tr>"
-                if (data.Organizer != null) {
-                    var organizerString = "<tr><th>Organizer</th>";
-                    for (var i = 0; i < data.Organizer.length; i++) {
-                        var currentOrganizer = data.Organizer[i];
-                        organizerString += "<td><a href='" + currentOrganizer.link + "'>" + currentOrganizer.name + "</a></td>";
-                    }
-                    organizerString += "</tr>";
-                    _table.innerHTML += organizerString;
-                }
-                if (data.Links != null) _table.innerHTML += "<tr><th>Link</th><td><a href=\"" + data.Links.link + "\"'>WebPage</a></td></tr>"
-                if (data['Number of Teams'] != null) _table.innerHTML += "<tr><th>Teams</th><td>" + data['Number of Teams'] + "</td></tr>"
-                if (data['Prize Pool'] != null) _table.innerHTML += "<tr><th>Prize_Pool</th><td>" + data['Prize Pool'] + "</td></tr>"
-                else if (data.Prize != null) _table.innerHTML += "<tr><th>Prize</th><td>" + data['Prize'] + "</td></tr>"
-                if (data.Region != null) _table.innerHTML += "<tr><th>Region</th><td>" + data.Region + "</td></tr>"
-                if (data.Type != null) _table.innerHTML += "<tr><th>Type</th><td>" + data.Type + "</td></tr>"
-                if (data.Tier != null) _table.innerHTML += "<tr><th>Tier</th><td>" + data.Tier + "</td></tr>"
-                if (data.Streams != null) {
-                    var StreamStr = "<tr><th>Steams</th>";
-                    for (var i = 0; i < data.Streams.length; i++) {
-                        curstream = data.Streams[i];
-                        StreamStr += "<td><a href=\"" + curstream.link + "\">" + curstream.name + "</a></td>"
-                    }
-                    _table.innerHTML += StreamStr + "</tr>";
-                }
-                if (arguments[0].data.Schedule != null) {
-                    var schStr = "<td colspan = 2><table border = 1><th colspan = 2>schedule</th>"
-                    for (var i = 0; i < data.Schedule.length; i++) {
-                        curSchedule = data.Schedule[i]
-                        schStr += "<tr><td>" + curSchedule[0] + "</td><td>" + curSchedule[1] + "</td></tr>"
-                    }
-                    _table.innerHTML += schStr + "</table></td></tr>";
-                }
-            }
-        }
-        getVariableHandler();
-        if (id == null || table_n == null) {} else get_detail(table_n, id);
+        document.addEventListener("load", function() {
+            reloadLoginState(false);
+        });
     </script>
 </body>
 
-</html>
+</html> $("#Nav").load("navbar.html"); }); var id = null, table_n = null function getQueryVariable(variable) { var query = window.location.search.substring(1); var vars = query.split('&'); for (var i = 0; i
+< vars.length; i++) { var pair=v ars[i].split( '=');
+    if (decodeURIComponent(pair[0])==v ariable) { return decodeURIComponent(pair[1]); } } return null; } function getVariableHandler() { id=g etQueryVariable( "id"); table_n=g etQueryVariable( "table") if (id !==n ull && table_n !=n ull) { console.log(id);
+    } else { console.error( "Error"); } } function writedata() { if (arguments.length==0 ) {} else { name=a rguments[0].name; var currentData=a rguments[0]; var data=a rguments[0].data; document.title="ROX - " + name document.getElementById( "Breadcrumbs").innerHTML="<li class='breadcrumb-item'><a href='./'>Dashboard</a></li><li class='breadcrumb-item'><a href=\"
+    javascript:;\ " onClick=\"go_table( 'LOL')\ ">" + table_n + "</a></li><li class='breadcrumb-item active'>" + name + "</li>" document.getElementById( "con_name").innerText=n ame; document.getElementById( "contexts").innerHTML="<table id='_table'>" _table=d
+    ocument.getElementById( "_table") _table.innerHTML +="<tr><th>start</th><td>" + currentData.start + "</td></tr>" _table.innerHTML +="<tr><th>end</th><td>" + currentData.end + "</td></tr>" if (data.Organizer !=n ull) { var organizerString="<tr><th>Organizer</th>"
+    ; for (var i=0 ; i < data.Organizer.length; i++) { var currentOrganizer=d ata.Organizer[i]; organizerString +="<td><a href='" + currentOrganizer.link + "'>" + currentOrganizer.name + "</a></td>"; } organizerString +="</tr>" ; _table.innerHTML +=o rganizerString;
+    } if (data.Links !=n ull) _table.innerHTML +="<tr><th>Link</th><td><a href=\" " + data.Links.link + "\ "'>WebPage</a></td></tr>" if (data[ 'Number of Teams'] !=n ull) _table.innerHTML +="<tr><th>Teams</th><td>" + data[ 'Number of Teams'] +
+    "</td></tr>" if (data[ 'Prize Pool'] !=n ull) _table.innerHTML +="<tr><th>Prize_Pool</th><td>" + data[ 'Prize Pool'] + "</td></tr>" else if (data.Prize !=n ull) _table.innerHTML +="<tr><th>Prize</th><td>" + data[ 'Prize'] + "</td></tr>" if (data.Region !=n ull)
+    _table.innerHTML +="<tr><th>Region</th><td>" + data.Region + "</td></tr>" if (data.Type !=n ull) _table.innerHTML +="<tr><th>Type</th><td>" + data.Type + "</td></tr>" if (data.Tier !=n ull) _table.innerHTML +="<tr><th>Tier</th><td>" + data.Tier +
+    "</td></tr>" if (data.Streams !=n ull) { var StreamStr="<tr><th>Steams</th>" ; for (var i=0 ; i < data.Streams.length; i++) { curstream=d ata.Streams[i]; StreamStr +="<td><a href=\" " + curstream.link + "\ ">" + curstream.name + "</a></td>" } _table.innerHTML +=S
+    treamStr + "</tr>"; } if (arguments[0].data.Schedule !=n ull) { var schStr="<td colspan = 2><table border = 1><th colspan = 2>schedule</th>" for (var i=0 ; i < data.Schedule.length; i++) { curSchedule=d ata.Schedule[i] schStr +="<tr><td>" + curSchedule[0]
+    + "</td><td>" + curSchedule[1] + "</td></tr>" } _table.innerHTML +=s chStr + "</table></td></tr>"; } } } getVariableHandler(); if (id==n ull || table_n==n ull) {} else get_detail(table_n, id); document.addEventListener( "load", function() { reloadLoginState(false);
+    }); </script>
+    </body>
+
+    </html>

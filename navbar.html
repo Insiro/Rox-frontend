@@ -1,6 +1,18 @@
-<ul class="navbar-nav ml-auto ml-md-0">
+<ul class="navbar-nav ml-auto ml-md-0" id='logged_nav'>
+    <li class="nav-item unloggined" id='logIn'>
+        <a href="#" onclick="$('#Login ').modal('show ')">Sign-In</a>
+    </li>
+    <li class="nav-item loggined">
+        <a href="#" onclick="logout()" style="display: none">Sign-Out</a>
+    </li>
     <li class="nav-item">
-        <a href="#" onclick="loginModal()">Sign-In</a>
+        item 1
+    </li>
+
+</ul>
+<ul class="navbar-nav ml-auto ml-md-0" id='unlogged_nav ' style='display: none '>
+    <li class="nav-item loggined">
+        <a href="#" onclick="logout()">Sign-Out</a>
     </li>
     <li class="nav-item">
         item 1

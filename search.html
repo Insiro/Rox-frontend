@@ -22,32 +22,11 @@
 
     <!-- dialog -->
 
-    <div class="modal dia" id="modalDialog">
-        <div class="modal-dialog dias">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="dialogName">blank dialog</h5>
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>&times;</span>
-                    </button>
-                </div>
-                <div id="dialogContents" class="modal-body">
-                    <p>Content of the modal window</p>
-                    <table id="diatable"></table>
-                </div>
-                <div class="modal-footer">
-                    <button id="detailBtn" type="button" class="btn btn-primary">Go Details</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
+    <div class="modal dia" id="Login"> </div>
+    <div class="modal dia" id="modalDialog"></div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
-        <a class="navbar-brand mr-1" href="index.html">ROX</a>
-
+        <a class="navbar-brand mr-1" href="./">ROX</a>
 
         <!-- Navbar Search -->
         <form action="search.html" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -55,16 +34,17 @@
                 <input type="text" class="form-control" name="kq" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
+                <i class="fas fa-search"></i>
+              </button>
                 </div>
             </div>
         </form>
 
         <!-- Navbar -->
-        <div id="Nav"></div>
+        <div id='Nav'></div>
 
     </nav>
+
 
     <div id="wrapper">
 
@@ -158,25 +138,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -186,6 +147,8 @@
         $(function() {
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");
+            $("#Login").load("log-inModal.html");
+            $("#modalDialog").load("modal_dialog.html");
         });
         var search_str = null
 
@@ -202,12 +165,12 @@
         }
 
         function getVariableHandler() {
-            search_str = getQueryVariable("kq").replace("+", " ");
-            if (search_str !== null) {
+            quey = getQueryVariable("kq")
+            console.log(quey)
+            if (quey != null) {
+                search_str = quey.replace("+", " ");
                 console.log(search_str);
                 getSearchData('LOL', search_str)
-            } else {
-                writeList();
             }
         }
 
@@ -250,6 +213,9 @@
             }
         }
         getVariableHandler()
+        document.addEventListener("load", function() {
+            reloadLoginState(false);
+        });
     </script>
 
 

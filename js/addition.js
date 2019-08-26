@@ -19,6 +19,13 @@ function go_detail() {
     }
 }
 
+function login() {
+    var form = document.getElementByID('loginform').value;
+    console.log(form)
+    console.log(form.id)
+    console.log(form.pxw)
+    window.open(form + 'id :' + form.id)
+}
 
 function nullDialog() {
     var name = document.getElementById("dialogName")
@@ -43,6 +50,7 @@ function viewDialog() {
         req.open("GET", "http://localhost:8080/api/info/" + table + "/" + id);
         req.addEventListener("load", function() {
             if (req.status != 200) {
+                console.log('status error')
                 nullDialog()
                 return
             }
@@ -57,7 +65,7 @@ function viewDialog() {
             var data = json.data;
             var curdata = data.data
             name.innerText = data.name;
-            console.log(curdata)
+            console.log("curdata", curdata)
             var _table = document.getElementById("diatable")
             _table.innerHTML += "<tr><th>start</th><td>" + data.start + "</td></tr>"
             if (data.end != null) _table.innerHTML += "<tr><th>end</th><td>" + data.end + "</td></tr>"
@@ -182,4 +190,74 @@ function addFooter() {
     var footerstr = "<div class=\"copyright text - center my - auto \"> <span > Copyright© Your Website 2019 </span> </div > "
     footerstr += ""
     footerdiv.innerHTML = footerstr
+}
+
+
+
+function reloadLoginState(loginBox) {
+    loginXhttpRequest = new XMLHttpRequest();
+    if (loginBox) {
+        $('#Login').modal('hide');
+    }
+
+    loginXhttpRequest.open("GET", "php/isLoggedin.php");
+    loginXhttpRequest.addEventListener("load", function() {
+        var log_in_item = document.getElementById('logged_nav');
+        var un_log_in_tem = document.getElementById('unlogged_nav');
+
+        console.log(log_in_item, un_log_in_tem);
+
+        json = JSON.parse(loginXhttpRequest.responseText);
+
+        console.log(json);
+
+        if (json.login) {
+            console.log("login: id:" + json.id);
+            log_in_item.style.display = 'none';
+            un_log_in_tem.style.display = '';
+        } else {
+            console.log("logout");
+            log_in_item.style.display = '';
+            un_log_in_tem.style.display = 'none';
+        }
+    });
+
+    loginXhttpRequest.send(null);
+}
+
+
+
+function loginRequest() {
+    var id = document.getElementById('login_id').value;
+    var pw = document.getElementById('login_pwd').value;
+
+    var xhttp = new XMLHttpRequest();
+
+    // Testing Code Only
+    xhttp.open("POST", "php/makelogin.php");
+
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+    xhttp.addEventListener("load", function() {
+        parsedJson = JSON.parse(xhttp.responseText);
+
+        if (parsedJson.success) {
+            reloadLoginState(true);
+        } else {
+            console.error(parsedJson);
+        }
+    });
+
+    xhttp.send("id=" + id + "&pwd=" + pw);
+}
+
+function logout() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "php/logout.php");
+
+    xhttp.addEventListener("load", function() {
+        reloadLoginState(false);
+    });
+
+    xhttp.send(null);
+
 }

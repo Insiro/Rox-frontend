@@ -1,0 +1,37 @@
+<div class="modal-dialog dias">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="SigndialogName">Sign In</h5>
+            <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+        </div>
+        <from name='login' id='loginform' action='php/makelogin.php' method='post'>
+            <div class="modal-body col-sm-10">
+                <div class='form-group'>
+                    <label class='col-form-label'>ID</label>
+                    <input type='text' class="form-control" name='id' id="login_id" placeholder='id' />
+                </div>
+                <div class='form-group'>
+                    <label class='col-form-label'>password</label>
+                    <input type='password' class="form-control" name='pwd' id="login_pwd" placeholder='password' />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class='col'>
+                    <div style="float: left;">
+                        <input type='checkbox'> remember me
+                    </div>
+                    <div class='row-sm-6 text-right'>
+                        <input type="submit" onclick="loginRequest()" value='Sign In' class="btn btn-primary">
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sign Up</button>
+                    </div>
+                </div>
+            </div>
+        </from>
+    </div>
+</div>
+
+<script>
+</script>
