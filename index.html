@@ -287,12 +287,6 @@
     <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
     <script src="js/addition.js"></script>
     <script>
-        $(function() {
-            $("#footer").load("footer.html");
-            $("#Nav").load("navbar.html");
-            $("#modalDialog").load("modal_dialog.html");
-            $("#Login").load("log-inModal.html");
-        });
         if (window.sessionStorage.getItem('login') == true) {
             console.log('logined')
             var logined = document.getElementsByClassName('loggined');
@@ -322,10 +316,12 @@
         //getGameList("OW")
         getGameList("LOL", 4);
 
-        document.addEventListener("load", function() {
-            document.addEventListener("load", function() {
-                reloadLoginState(false);
-            });;
+        $(function() {
+            $("#footer").load("footer.html");
+            $("#Nav").load("navbar.html");
+            $("#modalDialog").load("modal_dialog.html");
+            $("#Login").load("log-inModal.html");
+            reloadLoginState(false);
         });
 
         // LOGIN

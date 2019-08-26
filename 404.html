@@ -143,8 +143,10 @@
         $(document).ready(function() {
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");
+            $("#Login").load("log-inModal.html");
+            reloadLoginState(false);
         });
-                document.addEventListener("load", function() {
+        document.addEventListener("load", function() {
             reloadLoginState(false);
         });
     </script>

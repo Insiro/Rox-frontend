@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ROX - 404</title>
+    <title>ROX- Blank Page</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,6 +24,7 @@
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
         <a class="navbar-brand mr-1" href="./">ROX</a>
+
 
         <!-- Navbar Search -->
         <form action="search.html" class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -60,8 +61,8 @@
                     <h6 class="dropdown-header">devider</h6>
                     <div class="dropdown-divider"></div>
                     <h6 class="dropdown-header">Other Pages:</h6>
-                    <a class="dropdown-item active" href="404.html">404 Page</a>
-                    <a class="dropdown-item" href="blank.html">Blank Page</a>
+                    <a class="dropdown-item" href="404.html">404 Page</a>
+                    <a class="dropdown-item active" href="blank.html">Blank Page</a>
                     <a class="dropdown-item" href="Tables.html">table Page</a>
                     <a class="dropdown-item" href="search.html">Search Page</a>
                 </div>
@@ -72,14 +73,13 @@
                     <span>Games</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <h6 class="dropdown-header">Game:</h6>
+                    <h6 class="dropdown-header">Other Pages:</h6>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('OW')">OW</a>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('PUBG')">PUBG</a>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('LOL')">League of Legends</a>
                 </div>
             </li>
         </ul>
-
         <div id="content-wrapper">
 
             <div class="container-fluid">
@@ -89,20 +89,19 @@
                     <li class="breadcrumb-item">
                         <a href="./">Dashboard</a>
                     </li>
-                    <li class="breadcrumb-item active">404 Error</li>
+                    <li class="breadcrumb-item active">Blank Page</li>
                 </ol>
 
                 <!-- Page Content -->
-                <h1 class="display-1">404</h1>
-                <p class="lead">Page not found. You can
-                    <a href="javascript:history.back()">go back</a> to the previous page, or
-                    <a href="./">return home</a>.</p>
+                <h1>Blank Page</h1>
+                <hr>
+                <p>This is a blank page.</p>
 
             </div>
             <!-- /.container-fluid -->
 
             <!-- Sticky Footer -->
-            <div id='footer'></div>
+            <div id="footer"></div>
 
         </div>
         <!-- /.content-wrapper -->
@@ -133,7 +132,6 @@
             </div>
         </div>
     </div>
-
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -143,11 +141,11 @@
         $(document).ready(function() {
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");
-        });
-        document.addEventListener("load", function() {
+            $("#Login").load("log-inModal.html");
             reloadLoginState(false);
         });
     </script>
+
 </body>
 
 </html>

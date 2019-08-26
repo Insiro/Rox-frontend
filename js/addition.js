@@ -202,8 +202,8 @@ function reloadLoginState(loginBox) {
 
     loginXhttpRequest.open("GET", "php/isLoggedin.php");
     loginXhttpRequest.addEventListener("load", function() {
-        var log_in_item = document.getElementById('logged_nav');
-        var un_log_in_tem = document.getElementById('unlogged_nav');
+        var log_in_item = document.getElementById('logged_nav').style;
+        var un_log_in_tem = document.getElementById('unlogged_nav').style;
 
         console.log(log_in_item, un_log_in_tem);
 
@@ -213,12 +213,12 @@ function reloadLoginState(loginBox) {
 
         if (json.login) {
             console.log("login: id:" + json.id);
-            log_in_item.style.display = 'none';
-            un_log_in_tem.style.display = '';
+            log_in_item.display = 'none';
+            un_log_in_tem.display = '';
         } else {
             console.log("logout");
-            log_in_item.style.display = '';
-            un_log_in_tem.style.display = 'none';
+            log_in_item.display = '';
+            un_log_in_tem.display = 'none';
         }
     });
 
