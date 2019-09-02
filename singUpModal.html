@@ -1,0 +1,27 @@
+<div class="modal-dialog dias">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="regitdialogName">Sign Up</h5>
+            <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+        </div>
+        <from name='regit' id='regitform' onsubmit="signUp(this)" action='php/regist.php' method='post'>
+            <div class="modal-body col-sm-10">
+                <div class='form-group'>
+                    <label class='col-form-label'>ID</label>
+                    <input type='text' class="form-control" name='id' id="regit_id" placeholder='id' />
+                </div>
+                <div class='form-group'>
+                    <label class='col-form-label'>password</label>
+                    <input type='password' class="form-control" name='pwd' id="regit_pwd" placeholder='password' />
+                    <label class='col-form-label'>password check</label>
+                    <input type='password' class="form-control" name='check' id="regit_check" placeholder='password' />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" value='Sign Up' class="btn btn-primary">
+            </div>
+        </from>
+    </div>
+</div>

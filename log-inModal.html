@@ -24,8 +24,7 @@
                     </div>
                     <div class='row-sm-6 text-right'>
                         <input type="submit" onclick="loginRequest()" value='Sign In' class="btn btn-primary">
-                        </button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Sign Up</button>
+                        <button type="button" class="btn btn-secondary" onclick="regist_new()" data-dismiss="modal">Sign Up</button>
                     </div>
                 </div>
             </div>
@@ -34,4 +33,9 @@
 </div>
 
 <script>
+    function regist_new() {
+        $('#regist_new').modal('show');
+        $('#Login').modal('hide');
+
+    }
 </script>

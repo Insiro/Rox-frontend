@@ -1,3 +1,5 @@
+var hostname = 'http://localhost:8080/api/'
+
 function go_table() {
     if (arguments.length < 1) {
         console.log("None");
@@ -21,9 +23,9 @@ function go_detail() {
 
 function login() {
     var form = document.getElementByID('loginform').value;
-    console.log(form)
-    console.log(form.id)
-    console.log(form.pxw)
+    //console.log(form)
+    //console.log(form.id)
+    //console.log(form.pxw)
     window.open(form + 'id :' + form.id)
 }
 
@@ -47,7 +49,7 @@ function viewDialog() {
         var req = new XMLHttpRequest()
         var id = arguments[0]
         var table = arguments[1]
-        req.open("GET", "http://localhost:8080/api/info/" + table + "/" + id);
+        req.open("GET", hostname + "info/" + table + "/" + id);
         req.addEventListener("load", function() {
             if (req.status != 200) {
                 console.log('status error')
@@ -61,11 +63,11 @@ function viewDialog() {
             content.innerHTML = "<table id='diatable'></table>"
             console.log("GetList Get success!");
             var json = JSON.parse(req.responseText);
-            console.log(json);
+            //console.log(json);
             var data = json.data;
             var curdata = data.data
             name.innerText = data.name;
-            console.log("curdata", curdata)
+            //console.log("curdata", curdata)
             var _table = document.getElementById("diatable")
             _table.innerHTML += "<tr><th>start</th><td>" + data.start + "</td></tr>"
             if (data.end != null) _table.innerHTML += "<tr><th>end</th><td>" + data.end + "</td></tr>"
@@ -117,12 +119,12 @@ function viewDialog() {
 
 function getGameList(theGame, length) {
     var req = new XMLHttpRequest()
-    req.open("GET", "http://localhost:8080/api/list/" + theGame + "/" + length);
+    req.open("GET", hostname + "list/" + theGame + "/" + length);
     req.addEventListener("load", function() {
         if (req.status === 200) {
-            console.log("GetList Get success!");
+            console.log("GetList success!");
             var json = JSON.parse(req.responseText);
-            console.log(json);
+            //console.log(json);
             var data = json.data;
             writeList(theGame, data);
         } else {
@@ -135,12 +137,12 @@ function getGameList(theGame, length) {
 
 function get_detail(table, id) {
     var req = new XMLHttpRequest()
-    req.open("GET", "http://localhost:8080/api/info/" + table + "/" + id);
+    req.open("GET", hostname + "info/" + table + "/" + id);
     req.addEventListener("load", function() {
         if (req.status === 200) {
-            console.log("GetList Get success!");
+            console.log("Get info success!");
             var json = JSON.parse(req.responseText);
-            console.log(json);
+            //console.log(json);
             var data = json.data;
             writedata(data);
         } else {
@@ -204,13 +206,9 @@ function reloadLoginState(loginBox) {
     loginXhttpRequest.addEventListener("load", function() {
         var log_in_item = document.getElementById('logged_nav').style;
         var un_log_in_tem = document.getElementById('unlogged_nav').style;
-
-        console.log(log_in_item, un_log_in_tem);
-
+        //console.log(log_in_item, un_log_in_tem);
         json = JSON.parse(loginXhttpRequest.responseText);
-
-        console.log(json);
-
+        //console.log(json);
         if (json.login) {
             console.log("login: id:" + json.id);
             log_in_item.display = 'none';
@@ -243,7 +241,7 @@ function loginRequest() {
         if (parsedJson.success) {
             reloadLoginState(true);
         } else {
-            console.error(parsedJson);
+            console.error('login error');
         }
     });
 
@@ -260,4 +258,11 @@ function logout() {
 
     xhttp.send(null);
 
+}
+
+function signUp(data) {
+    if (data.pwd.value != data.check.value) {
+        return false;
+    }
+    return true;
 }

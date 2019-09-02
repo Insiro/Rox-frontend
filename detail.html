@@ -20,7 +20,7 @@
 
 <body id="page-top">
     <div class="modal dia" id="Login"> </div>
-
+    <div class="modal dia" id="regist_new"> </div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
         <a class="navbar-brand mr-1" href="./">ROX</a>
@@ -151,8 +151,8 @@
             $("#footer").load("footer.html");
             $("#Login").load("log-inModal.html");
             $("#Nav").load("navbar.html");
+            $("#regist_new").load("singUpModal.html");
             $("#Login").load("log-inModal.html");
-            reloadLoginState(false);
         });
 
         var id = null,
@@ -230,9 +230,6 @@
         }
         getVariableHandler();
         if (id == null || table_n == null) {} else get_detail(table_n, id);
-        document.addEventListener("load", function() {
-            reloadLoginState(false);
-        });
     </script>
 </body>
 

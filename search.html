@@ -21,7 +21,7 @@
 <body id="page-top">
 
     <!-- dialog -->
-
+    <div class="modal dia" id="regist_new"> </div>
     <div class="modal dia" id="Login"> </div>
     <div class="modal dia" id="modalDialog"></div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -145,11 +145,11 @@
     <script src="js/addition.js"></script>
     <script>
         $(function() {
+            $("#regist_new").load("singUpModal.html");
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");
             $("#modalDialog").load("modal_dialog.html");
             $("#Login").load("log-inModal.html");
-            reloadLoginState(false);
         });
         var search_str = null
 
@@ -214,9 +214,6 @@
             }
         }
         getVariableHandler()
-        document.addEventListener("load", function() {
-            reloadLoginState(false);
-        });
     </script>
 
 

@@ -23,7 +23,7 @@
 
 
     <!-- dialog -->
-
+    <div class="modal dia" id="regist_new"> </div>
     <div class="modal dia" id="modalDialog"></div>
     <div class="modal dia" id="Login"> </div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
@@ -171,11 +171,11 @@
     <script src="js/addition.js"></script>
     <script>
         $(function() {
+            $("#regist_new").load("singUpModal.html");
+            $("#Login").load("log-inModal.html");
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");
             $("#modalDialog").load("modal_dialog.html");
-            $("#Login").load("log-inModal.html");
-            reloadLoginState(false);
         });
         var tableName;
 
@@ -212,9 +212,6 @@
 
         getVariableHandler();
         if (tableName === "LOL") getGameList("LOL");
-        document.addEventListener("load", function() {
-            reloadLoginState(false);
-        });;
     </script>
 </body>
 

@@ -25,6 +25,7 @@
 
     <div class="modal dia" id="modalDialog"></div>
     <div class="modal dia" id="Login"> </div>
+    <div class="modal dia" id="regist_new"> </div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
         <a class="navbar-brand mr-1" href=".">ROX</a>
@@ -319,9 +320,9 @@
         $(function() {
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");
+            $("#regist_new").load("singUpModal.html");
             $("#modalDialog").load("modal_dialog.html");
             $("#Login").load("log-inModal.html");
-            reloadLoginState(false);
         });
 
         // LOGIN

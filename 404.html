@@ -20,7 +20,7 @@
 
 <body id="page-top">
     <div class="modal dia" id="Login"> </div>
-
+    <div class="modal dia" id="regist_new"> </div>
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
 
         <a class="navbar-brand mr-1" href="./">ROX</a>
@@ -144,10 +144,8 @@
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");
             $("#Login").load("log-inModal.html");
-            reloadLoginState(false);
-        });
-        document.addEventListener("load", function() {
-            reloadLoginState(false);
+            $("#regist_new").load("singUpModal.html");
+
         });
     </script>
 </body>
