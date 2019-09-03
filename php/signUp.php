@@ -6,9 +6,12 @@ $db = new mysqli($dbcred['host'], $dbcred['user']. $dbcred['pass'], $dbcred['dbn
 $res = $db->query("SELECT * FROM users WHERE id='".$db->real_escape_string($id)."'");
 if ($res->num_rows > 0) {
     //THERE ARE
+
+    // GIT 으로 마저 작업함.
 }
 else {
-    $db = new mysqli("INSERT INTO (id, pass)VALUES("+$db->real_escape_string($id), $pwd+")");
+
+    $db->query("INSERT INTO (id, pass) VALUES (".$db->real_escape_string($id).",".$pwd.")");
 }
 
 ?>
