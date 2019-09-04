@@ -82,7 +82,7 @@ function viewDialog() {
             }
             if (curdata.Links != null) _table.innerHTML += "<tr><th>Link</th><td><a href=\"" + curdata.Links.link + "\"'>WebPage</a></td></tr>"
             if (curdata['Number of Teams'] != null) _table.innerHTML += "<tr><th>Teams</th><td>" + curdata['Number of Teams'] + "</td></tr>"
-            if (curdata['Prize Pool'] != null) _table.innerHTML += "<tr><th>Prize_Pool</th><td>" + data['Prize Pool'] + "</td></tr>"
+            if (curdata['Prize Pool'] != null) _table.innerHTML += "<tr><th>Prize_Pool</th><td>" + curdata['Prize Pool'] + "</td></tr>"
             else if (curdata.Prize != null) _table.innerHTML += "<tr><th>Prize</th><td>" + curdata['Prize'] + "</td></tr>"
             if (curdata.Region != null) _table.innerHTML += "<tr><th>Region</th><td>" + curdata.Region + "</td></tr>"
             if (curdata.Type != null) _table.innerHTML += "<tr><th>Type</th><td>" + curdata.Type + "</td></tr>"
@@ -91,22 +91,24 @@ function viewDialog() {
                 var StreamStr = "<tr><th>Steams</th>";
                 for (var i = 0; i < curdata.Streams.length; i++) {
                     curstream = curdata.Streams[i];
+                    if (curstream.name == 'Full List')
+                        continue;
                     StreamStr += "<td><a href=\"" + curstream.link + "\">" + curstream.name + "</a></td>"
                 }
                 _table.innerHTML += StreamStr + "</tr>";
             }
-            if (curdata.Schedule != null) {
-                var schStr = "<table id='sch'  class='ssch' style=' display:none'border = 1><tr><th colspan = 2>schedule</th></tr>"
-                for (var i = 0; i < curdata.Schedule.length; i++) {
-                    curSchedule = curdata.Schedule[i]
-                    schStr += "<tr><td>" + curSchedule[0] + "</td><td>" + curSchedule[1] + "</td></tr>"
-                }
-                schStr += "</table>";
-                content.innerHTML += "<span>Schedule : </span> "
-                content.innerHTML += "<span style='' id='show'onclick=\"document.getElementById('sch').style.display='';document.getElementById('hide').style=' '; document.getElementById('show').style.display='none';\"><a href='javascript:;'>Show</a></span>"
-                content.innerHTML += "<span style='display:none' id='hide'onclick=\"document.getElementById('sch').style.display='none';document.getElementById('show').style=' '; document.getElementById('hide').style.display='none';\"><a href='javascript:;'>Hide</a></span><br>"
-                content.innerHTML += schStr
-            }
+            // if (curdata.Schedule != null) {
+            //     var schStr = "<table id='sch'  class='ssch' style=' display:none'border = 1><tr><th colspan = 2>schedule</th></tr>"
+            //     for (var i = 0; i < curdata.Schedule.length; i++) {
+            //         curSchedule = curdata.Schedule[i]
+            //         schStr += "<tr><td>" + curSchedule[0] + "</td><td>" + curSchedule[1] + "</td></tr>"
+            //     }
+            //     schStr += "</table>";
+            //     content.innerHTML += "<span>Schedule : </span> "
+            //     content.innerHTML += "<span style='' id='show'onclick=\"document.getElementById('sch').style.display='';document.getElementById('hide').style=' '; document.getElementById('show').style.display='none';\"><a href='javascript:;'>Show</a></span>"
+            //     content.innerHTML += "<span style='display:none' id='hide'onclick=\"document.getElementById('sch').style.display='none';document.getElementById('show').style=' '; document.getElementById('hide').style.display='none';\"><a href='javascript:;'>Hide</a></span><br>"
+            //     content.innerHTML += schStr
+            // }
 
         });
         req.send(null);

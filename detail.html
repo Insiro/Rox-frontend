@@ -50,7 +50,7 @@
         <ul class="sidebar navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="./">
-                    <span>Dashboard</span>
+                    <span>Dash Board</span>
                 </a>
             </li>
             <li class="nav-item dropdown">
@@ -78,6 +78,7 @@
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('OW')">OW</a>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('PUBG')">PUBG</a>
                     <a class="dropdown-item" href="javascript:;" onClick="go_table('LOL')">League of Legends</a>
+                    <a class="dropdown-item" href="javascript:;" onClick="go_table('STARCRAFT')">Star Craft</a>
                 </div>
             </li>
         </ul>
@@ -214,6 +215,8 @@
                     var StreamStr = "<tr><th>Steams</th>";
                     for (var i = 0; i < data.Streams.length; i++) {
                         curstream = data.Streams[i];
+                        if (curstream.name == 'Full List')
+                            continue;
                         StreamStr += "<td><a href=\"" + curstream.link + "\">" + curstream.name + "</a></td>"
                     }
                     _table.innerHTML += StreamStr + "</tr>";
