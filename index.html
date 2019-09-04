@@ -105,7 +105,7 @@
                                 <div class="mr-5">PUBG</div>
                             </div>
                             <ul class="list-game list-sideOcher" id="PUBG_list">
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> No data</a></li>
                             </ul>
                             <a class="card-footer text-sideOcher clearfix small z-1" href="javascript:;" onClick="go_table('PUBG')">
                                 <span class="float-left">View all Contests</span>
@@ -143,7 +143,7 @@
                                 <div class="mr-5">Over Watch</div>
                             </div>
                             <ul id="OW_list" class="list-game list-sideorange">
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> No data</a></li>
                             </ul>
                             <a class="card-footer text-sideorange clearfix small z-1" href="javascript:;" onClick="go_table('OW')">
                                 <span class="float-left">View all Contests</span>
@@ -162,7 +162,7 @@
                                 <div class="mr-5">gray card</div>
                             </div>
                             <ul class="list-game">
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> No data</a></li>
                             </ul>
                             <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
                                 <span class="float-left">View all Contests </span>
@@ -180,10 +180,7 @@
                                 <div class="mr-5">cyan card</div>
                             </div>
                             <ul class="list-game ">
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> No data</a></li>
                             </ul>
                             <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
                                 <span class="float-left">View all Contests</span>
@@ -201,10 +198,7 @@
                                 <div class="mr-5">blue card</div>
                             </div>
                             <ul class="list-game">
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> No data</a></li>
                             </ul>
                             <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
                                 <span class="float-left">View all Contests</span>
@@ -222,10 +216,7 @@
                                 <div class="mr-5">pupple card</div>
                             </div>
                             <ul class="list-game">
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> No data</a></li>
                             </ul>
                             <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
                                 <span class="float-left">View all Contests</span>
@@ -243,10 +234,7 @@
                                 <div class="mr-5">green card</div>
                             </div>
                             <ul class="list-game">
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
-                                <li><a href="javascript:;" onclick="viewDialog()"> items</a></li>
+                                <li><a href="javascript:;" onclick="viewDialog()"> No data</a></li>
                             </ul>
                             <a class="card-footer text-white clearfix small z-1" href="javascript:;" onClick="go_table()">
                                 <span class="float-left">View all Contests</span>
@@ -303,8 +291,10 @@
         }
 
         function writeList() {
-            if (arguments[1].length == 0 || arguments.length < 1) document.getElementById(theGame + "_list").innerHTML += ("<li> No data </li>");
+
+            if (arguments.length != 2 || arguments[1].length == 0 || arguments.length < 1) console.error('get data fails');
             else {
+                document.getElementById(arguments[0] + "_list").innerHTML = '';
                 for (var i = 0; i < arguments[1].length; i++) {
                     document.getElementById(arguments[0] + "_list").innerHTML += ("<li ><a onclick='viewDialog(\"" + arguments[1][i]._id + "\", \"" + arguments[0] + "\")' href='javascript:;'>" + (arguments[1][i].name.length > 25 ? arguments[1][i].name.substring(0, 23) + "..." : arguments[1][i].name) + "</a></li>");
                 }
@@ -316,7 +306,8 @@
         //getGameList("PUBG")
         //getGameList("OW")
         getGameList("LOL", 4);
-
+        getGameList("PUBG", 4);
+        getGameList("OW", 4);
         $(function() {
             $("#footer").load("footer.html");
             $("#Nav").load("navbar.html");

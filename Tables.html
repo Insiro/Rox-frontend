@@ -199,7 +199,7 @@
         function writeList() {
 
             document.getElementById("sc_list").innerHTML = "";
-            if (arguments.length < 1 || arguments[1].length == 0) document.getElementById("sc_list").innerHTML += (
+            if (arguments.length != 2 || arguments[1].length == 0) document.getElementById("sc_list").innerHTML += (
                 "<tr><td colspan='3'> No data </td></tr>");
             else {
                 for (var i = 0; i < arguments[1].length; i++) {
@@ -211,7 +211,7 @@
         }
 
         getVariableHandler();
-        if (tableName === "LOL") getGameList("LOL");
+        getGameList(tableName);
         //getGameList(tableName);
     </script>
 </body>

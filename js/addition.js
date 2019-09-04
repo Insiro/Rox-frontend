@@ -128,7 +128,7 @@ function getGameList(theGame, length) {
             var data = json.data;
             writeList(theGame, data);
         } else {
-            writeList();
+            writeList(theGame);
             console.error("NONE");
         }
     });
@@ -303,7 +303,12 @@ function signUp() {
 
     xhttp.send("id=" + data.getElementById("regit_id").value + "&pwd=" + data.getElementById("regit_pwd").value);
 
-    
+
 
     return true;
+}
+
+function onsubmitPress(form) {
+    if (event.keyCode == 13)
+        form.submit();
 }
