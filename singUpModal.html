@@ -6,7 +6,7 @@
                         <span>&times;</span>
                     </button>
         </div>
-        <from name='regit' id='regitform' onsubmit="signUp(this)" action='php/regist.php' method='post'>
+        <from name='regit' id='regitform'>
             <div class="modal-body col-sm-10">
                 <div class='form-group'>
                     <label class='col-form-label'>ID</label>
@@ -20,8 +20,11 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <input type="submit" value='Sign Up' class="btn btn-primary">
+                <button class="btn btn-primary" onclick="signUp()" type="button">Sign Up</button>
             </div>
         </from>
     </div>
 </div>
+<script>
+    
+</script>

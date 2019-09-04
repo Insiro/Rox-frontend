@@ -13,7 +13,9 @@ $pwd = $_POST['pwd'];
 
 $success = false;
 
-$db = new mysqli($dbcred['host'], $dbcred['user']. $dbcred['pass'], $dbcred['dbname']);
+include "db_cred.php";
+
+$db = new mysqli($dbcred['host'], $dbcred['user'], $dbcred['pass'], $dbcred['dbname']);
 $res = $db->query("SELECT * FROM users WHERE id='".$db->real_escape_string($id)."'");
 
 if ($res->num_rows > 0) {

@@ -200,6 +200,7 @@ function reloadLoginState(loginBox) {
     loginXhttpRequest = new XMLHttpRequest();
     if (loginBox) {
         $('#Login').modal('hide');
+        $('#regist_new').modal('hide');
     }
 
     loginXhttpRequest.open("GET", "php/isLoggedin.php");
@@ -232,7 +233,7 @@ function loginRequest() {
     var xhttp = new XMLHttpRequest();
 
     // Testing Code Only
-    xhttp.open("POST", "php/makelogin.php");
+    xhttp.open("POST", "php/login.php");
 
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
     xhttp.addEventListener("load", function() {
@@ -241,11 +242,14 @@ function loginRequest() {
         if (parsedJson.success) {
             reloadLoginState(true);
         } else {
-            console.error('login error');
+            alert(parsedJson.message);
         }
     });
 
     xhttp.send("id=" + id + "&pwd=" + pw);
+
+    document.getElementById('login_id').value = "";
+    document.getElementById('login_pwd').value = "";
 }
 
 function logout() {
@@ -260,9 +264,46 @@ function logout() {
 
 }
 
-function signUp(data) {
-    if (data.pwd.value != data.check.value) {
+function signUp() {
+
+    data = document;
+    console.log("signup req!");
+    if (data.getElementById("regit_id").value.length === 0) {
+        alert("Enter your ID");
         return false;
     }
+
+    if (/\s/g.test(data.getElementById("regit_id").value)) {
+        alert("ID can not contain any whitespaces");
+        return false;
+    }
+
+    if (data.getElementById("regit_pwd").value !== data.getElementById("regit_check").value) {
+        alert("Password and Password check doesn't match.")
+        return false;
+    }
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "php/signUp.php");
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
+    xhttp.addEventListener("load", function() {
+        parsedJson = JSON.parse(xhttp.responseText);
+
+        if (parsedJson.success) {
+            alert("sign up complete, please sign in!");
+            data.getElementById("regit_id").value = "";
+            data.getElementById("regit_pwd").value = "";
+            data.getElementById("regit_check").value = "";
+
+            reloadLoginState(true);
+        } else {
+            alert(parsedJson.message);
+        }
+    });
+
+    xhttp.send("id=" + data.getElementById("regit_id").value + "&pwd=" + data.getElementById("regit_pwd").value);
+
+    
+
     return true;
 }
